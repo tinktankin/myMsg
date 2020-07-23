@@ -1,14 +1,48 @@
+{% extends 'base.html' %}
 {% load static %}
+
+{% block title %}
+Create Contact
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'Contact_Grps/css/createcon.css' %}">
+{% endblock style %}
+
+{% block script %}
+{% endblock script %}
+
+{% block body %}
+
+<section class="createcontact-form">
+    <div class="contact-form-container">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Create</button>
+        </form>
+    </div>
+</section>
+
+{% endblock body %}
+
+
+<!-- Previous HTML -->
+
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Contact</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Google Fonts
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
+    <!-- Vendor CSS Files 
     <link href="{% static 'user/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'user/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
     <link href="{% static 'user/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
@@ -17,14 +51,17 @@
     <link href="{% static 'user/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
     <link href="{% static 'user/vendor/aos/aos.css' %}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
+    <!-- Template Main CSS File 
     <link href="{% static 'user/css/style.css' %}" rel="stylesheet">
 </head>
+
 <body>
     <form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Create</button>
-</form>  
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Create</button>
+    </form>
 </body>
+
 </html>
+-->

@@ -1,4 +1,35 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Create Group
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'Contact_Grps/css/grps_form.css' %}">
+{% endblock style %}
+
+{% block script %}
+{% endblock script %}
+
+{% block body %}
+<section class="create-group-form">
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ form }}
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</section>
+
+{% endblock body %}
+
+<!-- 
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,13 +39,12 @@
 <body>
     <form method="POST" enctype="multipart/form-data"> 
   
-        <!-- Security token -->
         {% csrf_token %} 
       
-        <!-- Using the formset -->
         {{ form }} 
           
         <input type="submit" value="Submit"> 
     </form> 
 </body>
-</html>
+</html> 
+-->
