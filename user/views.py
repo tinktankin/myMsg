@@ -49,7 +49,7 @@ def signup(request):
                 messages.info(request,'Email Exists')
                 return redirect('signup')
             elif User.objects.filter(username=user_name).exists():
-                messages.error(request, "UserName Taken")
+                messages.error(request, "UserName has been Taken. Try New One.")
                 return redirect('signup')
             else:
                 user = User.objects.create_user(username = user_name,email= email, password = password1 ,is_active =False )
@@ -109,6 +109,8 @@ def logout(request):
     auth.logout(request)
     return redirect('index')
 
+def team(request):
+    return render(request,'user/team.html')
 
 
 

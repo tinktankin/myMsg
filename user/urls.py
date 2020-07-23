@@ -2,13 +2,14 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from .views import signup,LoginView,logout,index,activate_account
+from .views import signup,LoginView,logout,index,activate_account,team
 urlpatterns = [
     path('signup/',signup,name="signup"),
     path('signin/',LoginView.as_view(),name="signin"),
     path('activate/<slug:uidb64>/<slug:token>/',activate_account, name='activate'),
     path('logout/',logout,name="logout"),
     path('',index,name="index"),
+    path('team/',team,name="team"),
     path('password-reset/',
          auth_views.PasswordResetView.as_view(
              template_name='user/password_reset.html'

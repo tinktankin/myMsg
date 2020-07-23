@@ -24,6 +24,7 @@
         <input type="password" name="password">
       </label>
       <button class="submit" type="submit">Sign In</button>
+      <p class="forgot-pass"><a href="https://myaccount.google.com/lesssecureapps">Allow Less Secure Apps?</a></p>
       <p class="forgot-pass"><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
 
       <div class="social-media">
@@ -33,10 +34,14 @@
           <li><img src="{% static 'user/img/linkedin.png' %}"></li>
           <li><img src="{% static 'user/img/instagram.png' %}"></li>
         </ul>
+        <ul>
+          {%for message in messages %}
+          <li><h3>{{message}}</h3></li>
+          {% endfor %}
+        </ul>
       </div>
-      {%for message in messages %}
-                    <h3>{{message}}</h3>
-                {% endfor %}
+      
+                
       </form>
     </div>
 

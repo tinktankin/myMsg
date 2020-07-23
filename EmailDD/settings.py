@@ -146,15 +146,16 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 
-
+PROJECT_DOMAIN = '127.0.0.1'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'app email'
-EMAIL_HOST_PASSWORD = 'app_pass'
+EMAIL_HOST = 'server177.web-hosting.com'
+EMAIL_HOST_USER = 'support@tinktank.co.in'
+EMAIL_HOST_PASSWORD = '5h@l1n#S512'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL =EMAIL_HOST_USER
 
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
  

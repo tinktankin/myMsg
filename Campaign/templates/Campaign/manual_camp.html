@@ -187,7 +187,7 @@
     <div class="col-sm-2 sidenav">
       <div class="vertical-menu">
     {% for template in templates %}
-    <a href="/campaign/{{ template.id }}">{{ template.subject }}<span class="glyphicon glyphicon-user"></span></a>
+    <a href="/campaign0/{{ template.id }}">{{ template.subject }}<span class="glyphicon glyphicon-user"></span></a>
     {% endfor %}
 </div>  
        
@@ -197,13 +197,10 @@
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
-            <select name="group">
-              {% for group in groups %}
-              <option value ={{ group.id }}>{{ group.gname }}</option>
-              {% endfor %}
-              </select> 
+            <label>Email Id</label> 
+            <input type="character" name="emailids" placeholder="Enter commaa seperated email id's.">
+            <button><a href="{% url 'campaign' %}">Sent to added Group.</a></button>
 
-            <button><a href="{% url 'manual_campaign' %}">Sent to Custom Contact.</a></button>
             <label>Password</label>
             <input type="password" name="password">
               

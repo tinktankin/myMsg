@@ -13,11 +13,12 @@ class Template(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     subject = models.CharField(max_length=200)  
     content = RichTextUploadingField()
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, allow_unicode=True)
     
     def save(self,*args,**kwargs):
-        self.slug = slugify(self.subject)
-        super(Template,self).save(*args,**kwargs)
+        super(Template, self).save(*args, **kwargs)
+        self.slug = slugify(self.subject)+ "-" + str(self.id)
+        return super(Template,self).save(*args,**kwargs)
     def __str__(self):
         return self.subject
     
@@ -30,3 +31,13 @@ class Template(models.Model):
         return reverse("webpages", kwargs={
             'slug': self.slug
         })
+
+
+class Campaign(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    camp_name = models.CharField(max_length=200,blank=True)
+    sent_to = models.CharField(max_length=1000,blank=True)
+    no_of_receivers = models.IntegerField(default=0)
+    status = models.IntegerField(default=0)
+    timestamp = models.DateTimeField(auto_now_add=True,blank=True)
+

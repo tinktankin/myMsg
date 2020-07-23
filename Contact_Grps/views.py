@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import Contacts,Grps
 from django.contrib import messages
-from .forms import CreateGroupForm
-
+from .forms import CreateGroupForm,ContactUpdateForm,GroupUpdateForm,CreateContactForm
+from django.views.generic import UpdateView
 # Create your views here.
 def contact(request):
     contacts = Contacts.objects.filter(user = request.user)
@@ -13,22 +13,20 @@ def group(request):
     groups = Grps.objects.filter(user = request.user)
     return render(request,'Contact_Grps/groups.html',{'groups':groups})
 
-def createcontact(request):
+def createcontacts(request):
     if request.method =="POST":
-        name = request.POST['name']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        city = request.POST['city']
-        if Contacts.objects.filter(email = email).exists():
+        form = CreateContactForm(request.POST)
+        if Contacts.objects.filter(email = form['email'] ,user=request.user).exists():
                 messages.info(request,'This contact is already added.')
-                return redirect('createcontact')
-        else:
-            contact = Contacts.objects.create(user = request.user, name = name,email= email, phone = phone , city = city)
-            contact.save()
-            messages.info(request,'Contact Added Successfully.')
+                return redirect('createcontacts')
+        if form.is_valid():
+            cons = form.save(commit=False)
+            cons.user = request.user
+            cons.save()
             return redirect('allcontacts')
     else:
-        return render(request,'Contact_Grps/createcon.html')
+        form = CreateContactForm()
+        return render(request,'Contact_Grps/createcon.html',{'form':form})
 
 def creategroup(request):
     if request.method =="POST":
@@ -43,3 +41,17 @@ def creategroup(request):
     else:
         form = CreateGroupForm(instance=Grps(user=request.user))
     return render(request,'Contact_Grps/grps_form.html',{'form': form})
+
+class ContactUpdateView(UpdateView):
+    model = Contacts
+    form_class = ContactUpdateForm
+    template_name = "Contact_Grps/updatecontact.html"
+    
+    success_url = "/"
+
+class GroupUpdateView(UpdateView):
+    model = Grps
+    form_class = GroupUpdateForm
+    template_name = "Contact_Grps/updategroup.html"
+    
+    success_url = "/"
