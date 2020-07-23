@@ -68,6 +68,7 @@
 .nav-menu .active>a,
 .nav-menu li:hover>a {
     color: #e86161;
+    text-decoration: none;
 }
 
 .nav-menu .drop-down ul {
@@ -169,6 +170,7 @@
 .get-started-btn:hover {
     background: #cc1d1d;
     color: #fff;
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {
