@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Share</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        .column {
+            float: left;
+            width: 50%;
+          }
+          
+          /* Clear floats after the columns */
+          .row:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+
+          .fa {
+            padding: 20px;
+            font-size: 30px;
+            width: 30px;
+            text-align: center;
+            text-decoration: none;
+            margin: 5px 2px;
+            border-radius: 50%;
+          }
+
+          .fa-facebook {
+            background: #3B5998;
+            color: white;
+          }
+          
+          .fa-twitter {
+            background: #55ACEE;
+            color: white;
+          }
+
+          .fa-linkedin {
+            background: #007bb5;
+            color: white;
+          }
+
+          
+    </style>
+    <script>
+        function myFunction() {
+            /* Get the text field */
+            var copyText = document.getElementById("myInput");
+          
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+          
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+          
+            /* Alert the copied text */
+            alert("Copied the text: " + copyText.value);
+          }
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="column">
+            <ul class="w3-ul w3-border">
+                <li><h2>Templates</h2></li>
+                {% for template in templates %}
+                    <li><a href="/share/{{ template.id }}">{{ template.subject }}</a></li>
+                {% endfor %}
+              </ul>
+        </div>
+        <div class="column">
+            <!-- The text field -->
+            {% if url %}
+            <input type="text" value="http://127.0.0.1:8000{{ url }}" id="myInput">
+
+            <!-- The button used to copy the text -->
+            <button onclick="myFunction()">Copy text</button>
+            <br>
+            <br>
+            {% endif %}
+            <h2>Share With</h2>
+            <a href="{{ social.facebook_link }}" class="fa fa-facebook"></a>
+            <a href="{{ social.twitter_link }}" class="fa fa-twitter"></a>
+            <a href="{{ social.linkedin_link }}" class="fa fa-linkedin"></a>
+
+        </div>
+      </div>
+</body>
+</html>
