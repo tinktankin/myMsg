@@ -17,35 +17,138 @@ from django.utils.html import strip_tags
 from django.utils.module_loading import import_string
 from django.conf import settings
 import random
+from smtplib import SMTPAuthenticationError
 import urllib
 import requests
 from django.http import HttpResponse
 from PIL import Image
 # Create your views here.
 def campaign(request):
-    templates = Template.objects.filter(user = request.user)
-    groups = Grps.objects.filter(user=request.user)
-    #groups = Grps.objects.get(id=16).contacts.values_list()
-    if request.method == "POST":
-        gid = request.POST['group']
-        password = request.POST['password']
-        grp = Grps.objects.get(id=gid).contacts.values_list()
-        form = CustomEmail(request.POST)
-        if form.is_valid():
-            subject= form.cleaned_data['subject']
-            c = 0
-            for group in grp:
+    try:
+        templates = Template.objects.filter(user = request.user)
+        groups = Grps.objects.filter(user=request.user)
+        #groups = Grps.objects.get(id=16).contacts.values_list()
+        if request.method == "POST":
+            gid = request.POST['group']
+            password = request.POST['password']
+            grp = Grps.objects.get(id=gid).contacts.values_list()
+            form = CustomEmail(request.POST)
+            if form.is_valid():
+                subject= form.cleaned_data['subject']
+                c = 0
+                for group in grp:
+                    message = form.cleaned_data['content']
+                    camp = Campaign.objects.create(user=request.user,camp_name=subject)
+                    camp.save()
+                    cid = camp.id
+                    add = '<img src="/image_load/{}" height="0px" width="0px"/>'.format(cid)
+                    message+=add
+                    if message.find(str('%s'))!=-1:
+                        message = form.cleaned_data['content'] %(group[2])
+                    text = strip_tags(message)
+                    from_email= "'"+str(request.user.email)+"'"
+                    recipient_list= [group[5]]
+                    email = request.user.email
+                    connection = get_connection(
+                    host='smtp.gmail.com',
+                    username=email,
+                    password=password,
+                    fail_silently= False,
+                    )
+                    msg = EmailMultiAlternatives(subject,text,from_email,recipient_list,connection = connection)
+                    msg.attach_alternative(message,"text/html")
+                    print(str(request.user.email).strip())
+                    msg.send()
+                    c+=1
+                group = Grps.objects.get(id=gid)
+                camp = Campaign.objects.get(id=cid)
+                camp.sent_to=group.gname
+                camp.no_of_receivers = c
+                camp.status=0
+                camp.save()
+                messages.info(request,'Campaign Completed.')
+                return redirect('campaign')
+        else:
+            form = CustomEmail()
+            return render(request,'Campaign/campaign.html',{'templates':templates,'form':form,'groups':groups})
+    except SMTPAuthenticationError as e:
+        camp = Campaign.objects.get(id=cid)
+        camp.delete()
+        return render(request,'Campaign/errors.html')
+
+def usetemplates(request,id):
+    try:
+        templates = Template.objects.filter(user = request.user)
+        groups = Grps.objects.filter(user = request.user)
+        if request.method == "GET" and id:
+            template_instance = Template.objects.get(id=id)
+            form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
+            return render(request,'Campaign/campaign.html',{'templates':templates,'form':form,'groups':groups})
+        elif request.method == "POST":
+            gid = request.POST['group']
+            password = request.POST['password']
+            grp = Grps.objects.get(id=gid).contacts.values_list()
+            template_instance = Template.objects.get(id=id)
+            form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
+            if form.is_valid():
+                subject= form.cleaned_data['subject']
+                camp = Campaign.objects.create(user=request.user,camp_name=subject)
+                camp.save()
+                cid = camp.id
+                c =0
+                for group in grp:
+                    message = form.cleaned_data['content']
+                    add = '<img src="image_load/{}" height="0px" width="0px"/>'.format(cid)
+                    message+=add
+                    if message.find(str('%s'))!=-1:
+                        message = form.cleaned_data['content'] %(group[2])
+                    text = strip_tags(message)
+                    from_email= "'"+str(request.user.email)+"'"
+                    recipient_list= [group[5]]
+                    email = request.user.email
+                    connection = get_connection(
+                    host='smtp.gmail.com',
+                    username=email,
+                    password=password,
+                    fail_silently= False,
+                    )
+                    msg = EmailMultiAlternatives(subject,text,from_email,recipient_list,connection = connection)
+                    msg.attach_alternative(message,"text/html")
+                    print(str(request.user.email).strip())
+                    msg.send()    
+                    c+=1
+                group = Grps.objects.get(id=gid)
+                camp = Campaign.objects.get(id=cid)
+                camp.sent_to=group.gname
+                camp.no_of_receivers = c
+                camp.status=0
+                camp.save()
+                messages.info(request,'Campaign Completed.')
+                return redirect('campaign')
+    except SMTPAuthenticationError as e:
+        camp = Campaign.objects.get(id=cid)
+        camp.delete()
+        return render(request,'Campaign/errors.html')
+
+def manual_contact_campaign(request):
+    try:
+        templates = Template.objects.filter(user = request.user)
+        if request.method == "POST":
+            email_ids = request.POST['emailids']
+            password = request.POST['password']
+            form = CustomEmail(request.POST)
+            if form.is_valid():
+                subject= form.cleaned_data['subject']
+                ids = email_ids.split(',')
                 message = form.cleaned_data['content']
                 camp = Campaign.objects.create(user=request.user,camp_name=subject)
                 camp.save()
                 cid = camp.id
                 add = '<img src="/image_load/{}" height="0px" width="0px"/>'.format(cid)
                 message+=add
-                if message.find(str('%s'))!=-1:
-                    message = form.cleaned_data['content'] %(group[2])
                 text = strip_tags(message)
                 from_email= "'"+str(request.user.email)+"'"
-                recipient_list= [group[5]]
+                recipient_list= ids
                 email = request.user.email
                 connection = get_connection(
                 host='smtp.gmail.com',
@@ -56,151 +159,69 @@ def campaign(request):
                 msg = EmailMultiAlternatives(subject,text,from_email,recipient_list,connection = connection)
                 msg.attach_alternative(message,"text/html")
                 print(str(request.user.email).strip())
-                msg.send()
-                c+=1
-            group = Grps.objects.get(id=gid)
-            camp = Campaign.objects.get(id=cid)
-            camp.sent_to=group.gname
-            camp.no_of_receivers = c
-            camp.status=0
-            camp.save()
-            messages.info(request,'Check Your Email')
-            return redirect('campaign')
-    else:
-        form = CustomEmail()
-        return render(request,'Campaign/campaign.html',{'templates':templates,'form':form,'groups':groups})
-
-def usetemplates(request,id):
-    templates = Template.objects.filter(user = request.user)
-    groups = Grps.objects.filter(user = request.user)
-    if request.method == "GET" and id:
-        template_instance = Template.objects.get(id=id)
-        form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
-        return render(request,'Campaign/campaign.html',{'templates':templates,'form':form,'groups':groups})
-    elif request.method == "POST":
-        gid = request.POST['group']
-        password = request.POST['password']
-        grp = Grps.objects.get(id=gid).contacts.values_list()
-        template_instance = Template.objects.get(id=id)
-        form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
-        if form.is_valid():
-            subject= form.cleaned_data['subject']
-            camp = Campaign.objects.create(user=request.user,camp_name=subject)
-            camp.save()
-            cid = camp.id
-            c =0
-            for group in grp:
-                message = form.cleaned_data['content']
-                add = '<img src="image_load/{}" height="0px" width="0px"/>'.format(cid)
-                message+=add
-                if message.find(str('%s'))!=-1:
-                    message = form.cleaned_data['content'] %(group[2])
-                text = strip_tags(message)
-                from_email= "'"+str(request.user.email)+"'"
-                recipient_list= [group[5]]
-                email = request.user.email
-                connection = get_connection(
-                host='smtp.gmail.com',
-                username=email,
-                password=password,
-                fail_silently= False,
-                )
-                msg = EmailMultiAlternatives(subject,text,from_email,recipient_list,connection = connection)
-                msg.attach_alternative(message,"text/html")
-                print(str(request.user.email).strip())
-                msg.send()    
-                c+=1
-            group = Grps.objects.get(id=gid)
-            camp = Campaign.objects.get(id=cid)
-            camp.sent_to=group.gname
-            camp.no_of_receivers = c
-            camp.status=0
-            camp.save()
-            messages.info(request,'Check Your Email')
-            return redirect('campaign')
-
-def manual_contact_campaign(request):
-    templates = Template.objects.filter(user = request.user)
-    if request.method == "POST":
-        email_ids = request.POST['emailids']
-        password = request.POST['password']
-        form = CustomEmail(request.POST)
-        if form.is_valid():
-            subject= form.cleaned_data['subject']
-            ids = email_ids.split(',')
-            message = form.cleaned_data['content']
-            camp = Campaign.objects.create(user=request.user,camp_name=subject)
-            camp.save()
-            cid = camp.id
-            add = '<img src="/image_load/{}" height="0px" width="0px"/>'.format(cid)
-            message+=add
-            text = strip_tags(message)
-            from_email= "'"+str(request.user.email)+"'"
-            recipient_list= ids
-            email = request.user.email
-            connection = get_connection(
-            host='smtp.gmail.com',
-            username=email,
-            password=password,
-            fail_silently= False,
-            )
-            msg = EmailMultiAlternatives(subject,text,from_email,recipient_list,connection = connection)
-            msg.attach_alternative(message,"text/html")
-            print(str(request.user.email).strip())
-            msg.send()  
-            c = len(ids)
-            camp = Campaign.objects.get(id=cid)
-            camp.sent_to=email_ids
-            camp.no_of_receivers = c
-            camp.status=0
-            camp.save()
-            messages.info(request,'Check Your Email')
-            return redirect('campaign')
-    else:
-        form = CustomEmail()
-        return render(request,'Campaign/manual_camp.html',{'templates':templates,'form':form})
+                msg.send()  
+                c = len(ids)
+                camp = Campaign.objects.get(id=cid)
+                camp.sent_to=email_ids
+                camp.no_of_receivers = c
+                camp.status=0
+                camp.save()
+                messages.info(request,'Campaign Completed.')
+                return redirect('campaign')
+        else:
+            form = CustomEmail()
+            return render(request,'Campaign/manual_camp.html',{'templates':templates,'form':form})
+    except SMTPAuthenticationError as e:
+        camp = Campaign.objects.get(id=cid)
+        camp.delete()
+        return render(request,'Campaign/errors.html')
 
 def usetemplates_mancontacts_camp(request,id):
-    templates = Template.objects.filter(user = request.user)
-    if request.method == "GET" and id:
-        template_instance = Template.objects.get(id=id)
-        form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
-        return render(request,'Campaign/manual_camp.html',{'templates':templates,'form':form})
-    elif request.method == "POST":
-        email_ids = request.POST['emailids']
-        password = request.POST['password']
-        template_instance = Template.objects.get(id=id)
-        form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
-        if form.is_valid():
-            subject= form.cleaned_data['subject']
-            message = form.cleaned_data['content']
-            camp = Campaign.objects.create(user=request.user,camp_name=subject)
-            camp.save()
-            cid = camp.id
-            add = '<img src="/image_load/{}" height="0px" width="0px"/>'.format(cid)
-            message+=add
-            ids = email_ids.split(',')
-            text = strip_tags(message)
-            from_email= "'"+str(request.user.email)+"'"
-            recipient_list= ids
-            email = request.user.email
-            connection = get_connection(
-            host='smtp.gmail.com',
-            username=email,
-            password=password,
-            fail_silently= False,
-            )
-            msg = EmailMultiAlternatives(subject,text,from_email,recipient_list,connection = connection)
-            msg.attach_alternative(message,"text/html")
-            msg.send()
-            c = len(ids)
-            camp = Campaign.objects.get(id=cid)
-            camp.sent_to=email_ids
-            camp.no_of_receivers = c
-            camp.status=0
-            camp.save() 
-            messages.info(request,'Check Your Email')
-            return redirect('manual_campaign')      
+    try:
+        templates = Template.objects.filter(user = request.user)
+        if request.method == "GET" and id:
+            template_instance = Template.objects.get(id=id)
+            form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
+            return render(request,'Campaign/manual_camp.html',{'templates':templates,'form':form})
+        elif request.method == "POST":
+            email_ids = request.POST['emailids']
+            password = request.POST['password']
+            template_instance = Template.objects.get(id=id)
+            form = CustomEmail(request.POST or None,initial={'subject':template_instance.subject,'content':template_instance.content})
+            if form.is_valid():
+                subject= form.cleaned_data['subject']
+                message = form.cleaned_data['content']
+                camp = Campaign.objects.create(user=request.user,camp_name=subject)
+                camp.save()
+                cid = camp.id
+                add = '<img src="/image_load/{}" height="0px" width="0px"/>'.format(cid)
+                message+=add
+                ids = email_ids.split(',')
+                text = strip_tags(message)
+                from_email= "'"+str(request.user.email)+"'"
+                recipient_list= ids
+                email = request.user.email
+                connection = get_connection(
+                host='smtp.gmail.com',
+                username=email,
+                password=password,
+                fail_silently= False,
+                )
+                msg = EmailMultiAlternatives(subject,text,from_email,recipient_list,connection = connection)
+                msg.attach_alternative(message,"text/html")
+                msg.send()
+                c = len(ids)
+                camp = Campaign.objects.get(id=cid)
+                camp.sent_to=email_ids
+                camp.no_of_receivers = c
+                camp.status=0
+                camp.save() 
+                messages.info(request,'Campaign Completed.')
+                return redirect('manual_campaign')  
+    except SMTPAuthenticationError as e:
+        camp = Campaign.objects.get(id=cid)
+        camp.delete()
+        return render(request,'Campaign/errors.html')    
 
 
 class TemplateDetailView(UpdateView):

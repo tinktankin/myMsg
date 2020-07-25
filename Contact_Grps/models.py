@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.utils.text import slugify
+
 # Create your models here.
 class Contacts(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
