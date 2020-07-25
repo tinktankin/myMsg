@@ -29,10 +29,9 @@
 
       <div class="social-media">
         <ul>
-          <li><a href="{% provider_login_url 'google' %}"><img src="{% static 'user/img/facebook.png' %}"></a></li>
-          <li><img src="{% static 'user/img/twitter.png' %}"></li>
-          <li><img src="{% static 'user/img/linkedin.png' %}"></li>
-          <li><img src="{% static 'user/img/instagram.png' %}"></li>
+          
+          <center><li><a href="{% provider_login_url 'google' %}"><img src="{% static 'user/img/facebook.png' %}"></a></li></center>
+          
         </ul>
         <ul>
           {%for message in messages %}
