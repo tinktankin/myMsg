@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'user',
     'Campaign',
     'Contact_Grps',
+    'Social',
     'multiselectfield',
     'ckeditor',
     'ckeditor_uploader',

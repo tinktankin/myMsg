@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('user.urls')),
     path('', include('Campaign.urls')),
     path('', include('Contact_Grps.urls')),
+    path('', include('Social.urls')),
     path('accounts/', include('allauth.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
