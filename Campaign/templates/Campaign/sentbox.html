@@ -2,176 +2,179 @@
 {% load static %}
 
 {% block title %}
+SentBox
 {% endblock title %}
 
 {% block style %}
 <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */
-    .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
-        background-color: black;
-    }
+  /* Remove the navbar's default margin-bottom and rounded borders */
+  .navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: black;
+  }
 
-    .navbar-brand {
-        color: white;
-        font-family: serif;
-        padding-left: 50px;
-        font-size: 30px;
-        font-weight: bold;
-    }
+  .navbar-brand {
+    color: white;
+    font-family: serif;
+    padding-left: 50px;
+    font-size: 30px;
+    font-weight: bold;
+  }
 
-    body {
+  body {
 
-        background: url('/static/user/img/img7.jpg') no-repeat center center;
-        background-size: cover;
-    }
+    background: #4b6cb7;
+    background: -webkit-linear-gradient(to left, #333270, #3e3d88);
+    background: linear-gradient(to left, #333270, #3e3d88);
+    color: #fff;
+  }
 
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {
-        height: 500px
-    }
+  /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+  .row.content {
+    height: 500px
+  }
 
-    /* Set gray background color and 100% height */
+  /* Set gray background color and 100% height */
+  .sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+  }
+
+  /* sildenav list */
+  .vertical-menu {
+    width: 200px;
+    height: 200px;
+    overflow-y: auto;
+
+  }
+
+  .vertical-menu a {
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+  }
+
+  .vertical-menu a:hover {
+    background-color: gray;
+  }
+
+  .vertical-menu a.active {
+    background-color: #269abc;
+    color: white;
+  }
+
+  .vertical-menu2 {
+    width: 200px;
+    padding-top: 30px;
+  }
+
+  .vertical-menu2 a {
+
+    background-color: #eee;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+  }
+
+  .vertical-menu2 a:hover {
+    background-color: gray;
+  }
+
+  /* On small screens, set height to 'auto' for sidenav and grid */
+  @media screen and (max-width: 767px) {
     .sidenav {
-        padding-top: 20px;
-        background-color: #f1f1f1;
-        height: 100%;
+      height: auto;
+      padding: 15px;
     }
 
-    /* sildenav list */
-    .vertical-menu {
-        width: 200px;
-        height: 200px;
-        overflow-y: auto;
-
+    .row.content {
+      height: auto;
     }
+  }
 
-    .vertical-menu a {
-        background-color: #eee;
-        color: black;
-        display: block;
-        padding: 12px;
-        text-decoration: none;
-    }
+  /* create account button */
+  .Create {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+  }
 
-    .vertical-menu a:hover {
-        background-color: gray;
-    }
+  .vertical-menu .glyphicon {
+    float: right;
+  }
 
-    .vertical-menu a.active {
-        background-color: #269abc;
-        color: white;
-    }
+  .vertical-menu2 .glyphicon {
+    float: right;
+  }
 
-    .vertical-menu2 {
-        width: 200px;
-        padding-top: 30px;
-    }
+  thead {
+    color: #fff;
+    font-size: 17px;
+  }
 
-    .vertical-menu2 a {
+  background: url(../img/home_img.jpg) no-repeat center center;
+  background-size: cover;
+  }
 
-        background-color: #eee;
-        color: black;
-        display: block;
-        padding: 12px;
-        text-decoration: none;
-    }
+  #home_content {
+    position: relative;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    margin-top: 12%;
+    margin-bottom: 12%;
+    background-color: rgba(0, 0, 0, 0.7);
+    max-width: 660px;
+  }
 
-    .vertical-menu2 a:hover {
-        background-color: gray;
-    }
+  #page_list {
+    padding-top: 50px;
+  }
 
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-        .sidenav {
-            height: auto;
-            padding: 15px;
-        }
 
-        .row.content {
-            height: auto;
-        }
-    }
+  #signup:before,
+  #Inbox:before,
+  #delivery:before {
+    display: block;
+    content: " ";
+    margin-top: -85px;
+    height: 85px;
+    visibility: hidden;
+  }
 
-    /* create account button */
-    .Create {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 20px;
-    }
+  .navbar-logo {
+    font-size: 30px;
+    color: grey;
+  }
 
-    .vertical-menu .glyphicon {
-        float: right;
-    }
-
-    .vertical-menu2 .glyphicon {
-        float: right;
-    }
-
-    thead {
-        color: black;
-        font-size: 17px;
-    }
-
-    background: url(../img/home_img.jpg) no-repeat center center;
-    background-size: cover;
-    }
-
+  @media(max-width:768px) {
     #home_content {
-        position: relative;
-        padding-top: 6%;
-        padding-bottom: 6%;
-        margin-top: 12%;
-        margin-bottom: 12%;
-        background-color: rgba(0, 0, 0, 0.7);
-        max-width: 660px;
+      padding-bottom: 15%;
     }
 
-    #page_list {
-        padding-top: 50px;
+    footer {
+      text-align: left;
     }
+  }
 
+  #sentbox {
+    margin-top: 70px;
+    background: none;
 
-    #signup:before,
-    #Inbox:before,
-    #delivery:before {
-        display: block;
-        content: " ";
-        margin-top: -85px;
-        height: 85px;
-        visibility: hidden;
-    }
+  }
 
-    .navbar-logo {
-        font-size: 30px;
-        color: grey;
-    }
+  a.navbar-brand {
+    color: rgb(95, 95, 253);
+    padding-left: 0;
+  }
 
-    @media(max-width:768px) {
-        #home_content {
-            padding-bottom: 15%;
-        }
-
-        footer {
-            text-align: left;
-        }
-    }
-
-    #sentbox {
-        margin-top: 70px;
-        background: none;
-
-    }
-
-    a.navbar-brand {
-        color: rgb(95, 95, 253);
-        padding-left: 0;
-    }
-
-    a.navbar-brand:hover {
-        color: rgb(0, 0, 255);
-    }
+  a.navbar-brand:hover {
+    color: rgb(0, 0, 255);
+  }
 </style>
 {% endblock style %}
 
@@ -181,39 +184,39 @@
 {% block body %}
 
 <div class="navbar navbar-static-top" role="navigation" id="sentbox">
-    <div class="navbar-header">
-        <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+  <div class="navbar-header">
+    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
             <span class="sr-only">Toggle </span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button> -->
-        <a class="navbar-brand" href="/">SentBox</a>
-    </div>
+    <a class="navbar-brand" href="/">SentBox</a>
+  </div>
 </div>
 <div class="col-sm-10 text-left">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Camp Name</th>
-                <th>Sent To</th>
-                <th>Date</th>
-                <th>Receiver's Count</th>
-                <th>Receiver's Status</th>
-            </tr>
-        </thead>
-        {% for campaign in campaigns %}
-        <tbody>
-            <tr>
-                <td>{{ campaign.camp_name }}</td>
-                <td>{{ campaign.sent_to}}</td>
-                <td>{{ campaign.timestamp }}</td>
-                <td>{{ campaign.no_of_receivers }}</td>
-                <td>{{ campaign.status}}</td>
-            </tr>
-        </tbody>
-        {% endfor %}
-    </table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Camp Name</th>
+        <th>Sent To</th>
+        <th>Date</th>
+        <th>Receiver's Count</th>
+        <th>Receiver's Status</th>
+      </tr>
+    </thead>
+    {% for campaign in campaigns %}
+    <tbody>
+      <tr>
+        <td>{{ campaign.camp_name }}</td>
+        <td>{{ campaign.sent_to}}</td>
+        <td>{{ campaign.timestamp }}</td>
+        <td>{{ campaign.no_of_receivers }}</td>
+        <td>{{ campaign.status}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
 </div>
 {% endblock body %}
 
