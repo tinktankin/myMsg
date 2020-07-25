@@ -1,3 +1,16 @@
+a {
+    color: #adc5fa;
+}
+
+a:hover {
+    color: #6a8ae2;
+    text-decoration: none !important;
+}
+
+.get-started-btn:hover {
+    background: #201dcc !important;
+}
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
@@ -5,12 +18,11 @@
     transition: all 0.5s;
     z-index: 997;
     padding: 15px 0;
-    /* margin-bottom: 100px; */
 }
 
 #header.header-scrolled,
 #header.header-inner-pages {
-    background: #703232;
+    background: #333270;
 }
 
 #header .logo {
@@ -67,8 +79,7 @@
 .nav-menu a:hover,
 .nav-menu .active>a,
 .nav-menu li:hover>a {
-    color: #e86161;
-    text-decoration: none;
+    color: #adc5fa;
 }
 
 .nav-menu .drop-down ul {
@@ -163,14 +174,13 @@
     transition: 0.3s;
     font-size: 14px;
     display: inline-block;
-    border: 2px solid #9c1414;
+    border: 2px solid #adc5fa;
     font-weight: 600;
 }
 
 .get-started-btn:hover {
     background: #cc1d1d;
     color: #fff;
-    text-decoration: none;
 }
 
 @media (max-width: 768px) {

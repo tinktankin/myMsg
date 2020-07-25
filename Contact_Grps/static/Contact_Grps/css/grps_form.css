@@ -12,7 +12,9 @@
 
 body {
     height: 100%;
-    background: linear-gradient(to left, rgb(18, 41, 53), hsl(175, 100%, 50%));
+    background: #4b6cb7;
+    background: -webkit-linear-gradient(to left, #333270, #3e3d88);
+    background: linear-gradient(to left, #333270, #3e3d88);
 }
 
 .create-group-form {

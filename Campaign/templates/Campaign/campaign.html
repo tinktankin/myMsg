@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block title %}
+Contact Page
 {% endblock title %}
 
 {% block style %}
@@ -11,6 +12,10 @@
 <link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
 <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
+    label {
+        color: #fff;
+    }
+
     .navbar {
         margin-bottom: 0;
         border-radius: 0;
@@ -26,9 +31,9 @@
     }
 
     body {
-
-        background: url('/static/user/img/img7.jpg') no-repeat center center;
-        background-size: cover;
+        background: #4b6cb7;
+        background: -webkit-linear-gradient(to left, #333270, #3e3d88);
+        background: linear-gradient(to left, #333270, #3e3d88);
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -53,7 +58,7 @@
 
     .vertical-menu a {
         background-color: #eee;
-        color: black;
+        color: #fff;
         display: block;
         padding: 12px;
         text-decoration: none;
@@ -76,7 +81,7 @@
     .vertical-menu2 a {
 
         background-color: #eee;
-        color: black;
+        color: #fff;
         display: block;
         padding: 12px;
         text-decoration: none;
@@ -118,9 +123,6 @@
         font-size: 17px;
     }
 
-    background: url(../img/home_img.jpg) no-repeat center center;
-    background-size: cover;
-    }
 
     #home_content {
         position: relative;
