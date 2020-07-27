@@ -1,0 +1,162 @@
+/* Remove the navbar's default margin-bottom and rounded borders */
+label {
+    color: #fff;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: black;
+}
+
+.navbar-brand {
+    color: white;
+    font-family: serif;
+    padding-left: 50px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+body {
+    background: #4b6cb7;
+    background: -webkit-linear-gradient(to left, #333270, #3e3d88);
+    background: linear-gradient(to left, #333270, #3e3d88);
+}
+
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+    height: 500px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+    overflow: scroll;
+}
+
+/* sildenav list */
+.vertical-menu {
+    width: 200px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.vertical-menu a {
+    background-color: #d0d7ff;
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 1.4rem;
+    overflow: auto;
+    transition: all .2s ease-in-out;
+}
+
+.vertical-menu a:hover {
+    background-color: #bdc6fc;
+    transition: all .2s ease-in-out;
+}
+
+.vertical-menu a.active {
+    background-color: #269abc;
+    color: white;
+}
+
+.vertical-menu2 {
+    width: 200px;
+    padding-top: 30px;
+}
+
+.vertical-menu2 a {
+
+    background-color: #eee;
+    color: #fff;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu2 a:hover {
+    background-color: gray;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+
+    .row.content {
+        height: auto;
+    }
+}
+
+/* create account button */
+.Create {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+.vertical-menu .glyphicon {
+    float: right;
+}
+
+.vertical-menu2 .glyphicon {
+    float: right;
+}
+
+thead {
+    color: black;
+    font-size: 17px;
+}
+
+
+#home_content {
+    position: relative;
+    padding-top: 6%;
+    padding-bottom: 6%;
+    margin-top: 12%;
+    margin-bottom: 12%;
+    background-color: rgba(0, 0, 0, 0.7);
+    max-width: 660px;
+}
+
+#page_list {
+    padding-top: 50px;
+}
+
+
+#signup:before,
+#Inbox:before,
+#delivery:before {
+    display: block;
+    content: " ";
+    margin-top: -85px;
+    height: 85px;
+    visibility: hidden;
+}
+
+.navbar-logo {
+    font-size: 30px;
+    color: grey;
+}
+
+@media(max-width:768px) {
+    #home_content {
+        padding-bottom: 15%;
+    }
+
+    footer {
+        text-align: left;
+    }
+}
+
+.container-fluid {
+    margin-top: 100px;
+}
