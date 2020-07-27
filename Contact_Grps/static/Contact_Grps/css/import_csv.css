@@ -1,0 +1,89 @@
+:root {
+    font-size: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+header {
+    background: #4b6cb7;
+    background: -webkit-linear-gradient(to left, #333270, #3e3d88);
+    background: linear-gradient(to left, #333270, #3e3d88);
+    padding: 7px 0 !important;
+}
+
+body {
+    height: 100%;
+
+}
+
+.import-csv {
+    margin-top: 70px;
+}
+
+.import-csv .form-container {
+    width: 50%;
+    margin: 0 auto;
+    font-size: 1.9rem;
+    padding: 10px 20px;
+    background-color: #eaf2ff;
+    border-radius: 20px;
+    text-align: center;
+    overflow: auto;
+}
+
+.import-csv .form-container .heading {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 500;
+}
+
+.import-csv .form-container form small {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+}
+
+.import-csv .form-container form input[type=file] {
+    font-size: 1.3rem;
+    width: fit-content;
+}
+
+.import-csv .form-container form button {
+    width: 100px;
+    border-radius: 20px;
+    height: 30px;
+    border: none;
+    outline: none;
+    font-size: 1.4rem;
+    background-color: green;
+    color: #fff;
+    transition: all .1s ease-in-out;
+}
+
+.import-csv .form-container form button:hover {
+    transform: scale(1.02);
+    transition: all .1s ease-in-out;
+}
+
+@media (max-width:992px) {
+    .import-csv .form-container {
+        width: 90%;
+    }
+}
+
+@media (max-width:768px) {
+    .import-csv .form-container {
+        width: 80%;
+    }
+}
+
+@media (max-width:576px) {
+    .import-csv .form-container {
+        width: 70%;
+    }
+}
