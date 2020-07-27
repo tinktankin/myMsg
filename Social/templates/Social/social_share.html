@@ -56,6 +56,17 @@ Social Share
         background: #007bb5;
         color: white;
     }
+
+    .button {
+        background-color: #e00303; /* Green */
+        border-radius: 10%;
+        color: white;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
 </style>
 {% endblock style %}
 
@@ -97,7 +108,7 @@ Social Share
             {% if url %}
             <input type="text" value="http://127.0.0.1:8000{{ url }}" id="myInput">
 
-            <button onclick="myFunction()">Copy text</button>
+            <button onclick="myFunction()" class="button">Copy text</button>
             <br>
             <br>
             {% endif %}

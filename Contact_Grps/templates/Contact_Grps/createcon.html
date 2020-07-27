@@ -19,25 +19,13 @@ Create Contact
         <form action="" method="post">
             {% csrf_token %}
             {{form.as_p}}
-<<<<<<< HEAD
-            <button type="submit">Create</button>
-
-            <div class="Create">
-                <a href="{% url 'import' %}" class="btn btn-danger btn-lg active">Import from CSV file</a>
-              </div>
-=======
             <button class="import" disabled="disabled"><a href="{% url 'import' %}">Import From CSV File</a></button>
             <button class="create" type="submit">Create</button>
->>>>>>> f5f9b32e4239608d917a91eb5c886a5f8fb268cf
         </form>
     </div>
     
 </section>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f5f9b32e4239608d917a91eb5c886a5f8fb268cf
 
 {% endblock body %}
 

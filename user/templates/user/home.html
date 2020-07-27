@@ -68,7 +68,7 @@
           <h1>Productive solution for you to connect with people</h1>
           <h2>Designed for creating,sending and tracking mail</h2>
           <div class="d-lg-flex">
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            <a href="{% url 'signin' %}" class="btn-get-started scrollto">Get Started</a>
 
           </div>
         </div>
@@ -92,36 +92,40 @@
           <p>Here is the details of progess report, see templates, register, delivery of mail and so many new features.Enjoy!! </p>
         </div>
 
+
         <div class="row">
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-log-in"></i></div>
-              <h4><a href="">Login/Signup</a></h4>
-              <p>You need just seconds to enjoy this new website to connect with people.Click here!! and login to enjoy .</p>
+              <div class="icon"><i class="bx bx-file"></i></div>      
+              <h4><a href="">Templates</a></h4>
+              <p>This provides you to create your own creation of mail as per need.Also provide many defaults template to save your time</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-file"></i></div>
-              <h4><a href="">Templates</a></h4>
-              <p>This provides you to create your own creation of mail as per need.Also provide many defaults template to save your time.</p>
+              <div class="icon"><i class="bx bx-log-in"></i></div>
+              <h4><a href="">Campaign</a></h4>
+              <p>You can just create your groups from contacts and start email campaigns.</p>
             </div>
           </div>
 
+          
+
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-receipt"></i></div>
-              <h4><a href="">Register Now</a></h4>
-              <p>Take this opportunity and enjoy!.Register yourself to connect with people also we provide all the updated details to you.</p>
+              <div class="icon"><i class="bx bx-envelope-open"></i></div> 
+              <h4><a href="">Tracking</a></h4>
+              <p>Keep track of the campaigns with the receivers status along with the informative Sentbox.</p>
             </div>
           </div>
 
           <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
             <div class="icon-box">
-              <div class="icon"><i class="bx bx-envelope-open"></i></div>
-              <h4><a href="">Inbox</a></h4>
-              <p>New feature with inbox send your mail on any social networking sites and connect to people.</p>
+              <div class="icon"><i class="bx bx-receipt"></i></div>
+              
+              <h4><a href="Register Now">Social Share</a></h4>
+              <p>Here you can share these email templates with more people with the feature to share these templates on social media.</p>
             </div>
           </div>
 
@@ -133,7 +137,7 @@
      <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
       <div class="container" data-aos="zoom-in">
-
+        {% if not user.is_authenticated %}
         <div class="row">
           <div class="col-lg-9 text-center text-lg-left">
             <h3>Join to discover</h3>
@@ -143,6 +147,14 @@
             <a class="cta-btn align-middle" href="#">Register Now</a>
           </div>
         </div>
+        {% else %}
+        <div class="row">
+          <div class="col-lg-9 text-center text-lg-left">
+            <h3>Explore more.........</h3>
+            <p> We are welcoming you to the journey. Let's get started. </p>
+          </div>
+        </div>
+        {% endif %}
 
       </div>
     </section><!-- End Cta Section -->
@@ -225,7 +237,7 @@
   </main><!-- End #main -->
 <!-- ======= Footer ======= -->
 <footer id="footer">
-
+{% if not user.is_authenticated %}
   <div class="footer-body">
     <div class="container">
       <div class="row justify-content-center">
@@ -238,6 +250,7 @@
       </div>
     </div>
   </div>
+{% endif %}
 
   <div class="footer-top">
     <div class="container">
@@ -257,9 +270,9 @@
         <div class="col-lg-3 col-md-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Login</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Register</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'index' %}">Home</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'signin' %}">Login</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'campaign' %}">Campaign</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
           </ul>
@@ -268,11 +281,11 @@
         <div class="col-lg-3 col-md-6 footer-links">
           <h4>Our Features</h4>
           <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Email Design</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Send email</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Group Delivery</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Contacts</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="#">Templates</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Contacts & Grouping</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Mailing Campaign's</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Tracking Email's</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">SentBox</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Social Share</a></li>
           </ul>
         </div>
 

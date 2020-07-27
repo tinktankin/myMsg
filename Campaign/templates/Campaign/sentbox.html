@@ -191,7 +191,7 @@ SentBox
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button> -->
-    <a class="navbar-brand" href="/">SentBox</a>
+    <a class="navbar-brand" href="/" style="color: white;">SentBox</a>
   </div>
 </div>
 <div class="col-sm-10 text-left">
@@ -208,11 +208,11 @@ SentBox
     {% for campaign in campaigns %}
     <tbody>
       <tr>
-        <td>{{ campaign.camp_name }}</td>
-        <td>{{ campaign.sent_to}}</td>
-        <td>{{ campaign.timestamp }}</td>
-        <td>{{ campaign.no_of_receivers }}</td>
-        <td>{{ campaign.status}}</td>
+        <td style="color: white;">{{ campaign.camp_name }}</td>
+        <td style="color: white;">{{ campaign.sent_to}}</td>
+        <td style="color: white;">{{ campaign.timestamp }}</td>
+        <td style="color: white;">{{ campaign.no_of_receivers }}</td>
+        <td style="color: white;">{{ campaign.status}}</td>
       </tr>
     </tbody>
     {% endfor %}

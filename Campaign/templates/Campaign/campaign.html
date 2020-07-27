@@ -10,6 +10,9 @@ Campaign
 <link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
+<link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
+
+<link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
 <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     label {
@@ -180,6 +183,16 @@ Campaign
     .container-fluid {
         margin-top: 100px;
     }
+    .button {
+        background-color: #e00303; /* Green */
+        border-radius: 10%;
+        color: white;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
 </style>
 {% endblock style %}
 
@@ -192,19 +205,55 @@ Campaign
 {% endblock script %}
 
 {% block body %}
-<div class="Create">
-    <a href="{% url 'manual_campaign' %}" class="btn btn-danger btn-lg active">Sent to Custom Contact.</a>
-</div>
-</div>
 <div class="container-fluid text-center">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <div class="vertical-menu">
+            <a href="{% url 'allgroups' %}" class="active">Templates</a>
+            {% for template in templates %}
+            <a href="/campaign/{{ template.id }}" style="color: black;">{{ template.subject }}</a>
+            {% endfor %}
+        </div>
+  
+      </div>
+      <div class="col-sm-10 text-left">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <select name="group">
+                {% for group in groups %}
+                <option value={{ group.id }}>{{ group.gname }}</option>
+                {% endfor %}
+            </select>
+            <label>Password</label>
+            <input type="password" name="password">
+
+            <button type="submit" class="button">Send</button>
+            
+        </form>
+        
+      </div>
+      <div class="Create">
+        <a href="{% url 'manual_campaign' %}" class="btn btn-danger btn-lg active">Sent to Custom Contact.</a>
+      </div>
+    </div>
+  </div>
+<!-- <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
             <div class="vertical-menu">
                 <h1>Template</h1>
-                {% for template in templates %}
-                <a href="/campaign/{{ template.id }}">{{ template.subject }}<span
-                        class="glyphicon glyphicon-user"></span></a>
-                {% endfor %}
+                
+                <div class="col-sm-2 sidenav">
+                    <div class="vertical-menu">
+                      <a href="{% url 'allgroups' %}" class="active">Templates</a>
+                      {% for template in templates %}
+                      <a href="#">{{ template.subject }}</a>
+                      {% endfor %}
+                    </div>
+              
+                  </div>
             </div>
 
         </div>
@@ -231,7 +280,7 @@ Campaign
             </div>
         </div>
     </div>
-</div>
+</div> -->
 {% endblock body %}
 
 <!--

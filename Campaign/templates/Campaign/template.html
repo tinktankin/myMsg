@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Template</title>
     <link rel="stylesheet" href="{% static 'user/css/formtext.css' %}">
+    <style>
+        .button {
+            background-color: #e00303; /* Green */
+            border-radius: 10%;
+            color: white;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+          }
+    </style>
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data">
@@ -16,7 +28,7 @@
             {{ form.as_p }}
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Update</button>
+            <button class="button" type="submit">Update</button>
         </div>
     </form>
 </body>

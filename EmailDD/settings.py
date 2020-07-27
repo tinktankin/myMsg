@@ -144,7 +144,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 1
+
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
@@ -154,11 +154,13 @@ LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'server177.web-hosting.com'
-EMAIL_HOST_USER = 'support@tinktank.co.in'
-EMAIL_HOST_PASSWORD = '5h@l1n#S512'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'noreply.edd.00@gmail.com'
+EMAIL_HOST_PASSWORD = 'eddadmin@123'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 
 CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 
@@ -170,3 +172,6 @@ CKEDITOR_CONFIGS = {
         'toolbar': None,
     },
 }
+
+
+SITE_ID = 1

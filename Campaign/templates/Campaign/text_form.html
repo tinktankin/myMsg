@@ -7,10 +7,196 @@ Template
 {% endblock title %}
 
 {% block style %}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static 'user/css/formtext.css' %}">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" href="{% static 'Campaign/css/text_form.css' %}">
+
+<!-- Bootstrap Core CSS 
+<link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
+<link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
+
+<link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
+<style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    label {
+        color: #fff;
+    }
+
+    .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+        background-color: black;
+    }
+
+    .navbar-brand {
+        color: white;
+        font-family: serif;
+        padding-left: 50px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    body {
+        background: #4b6cb7;
+        background: -webkit-linear-gradient(to left, #333270, #3e3d88);
+        background: linear-gradient(to left, #333270, #3e3d88);
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {
+        height: 500px
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+        padding-top: 20px;
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+
+    /* sildenav list */
+    .vertical-menu {
+        width: 200px;
+        height: 200px;
+        overflow-y: auto;
+
+    }
+
+    .vertical-menu a {
+        background-color: #eee;
+        color: #fff;
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+    }
+
+    .vertical-menu a:hover {
+        background-color: gray;
+    }
+
+    .vertical-menu a.active {
+        background-color: #269abc;
+        color: white;
+    }
+
+    .vertical-menu2 {
+        width: 200px;
+        padding-top: 30px;
+    }
+
+    .vertical-menu2 a {
+
+        background-color: #eee;
+        color: #fff;
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+    }
+
+    .vertical-menu2 a:hover {
+        background-color: gray;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+        .sidenav {
+            height: auto;
+            padding: 15px;
+        }
+
+        .row.content {
+            height: auto;
+        }
+    }
+
+    /* create account button */
+    .Create {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+    }
+
+    .vertical-menu .glyphicon {
+        float: right;
+    }
+
+    .vertical-menu2 .glyphicon {
+        float: right;
+    }
+
+    thead {
+        color: black;
+        font-size: 17px;
+    }
+
+
+    #home_content {
+        position: relative;
+        padding-top: 6%;
+        padding-bottom: 6%;
+        margin-top: 12%;
+        margin-bottom: 12%;
+        background-color: rgba(0, 0, 0, 0.7);
+        max-width: 660px;
+    }
+
+    #page_list {
+        padding-top: 50px;
+    }
+
+
+    #signup:before,
+    #Inbox:before,
+    #delivery:before {
+        display: block;
+        content: " ";
+        margin-top: -85px;
+        height: 85px;
+        visibility: hidden;
+    }
+
+    .navbar-logo {
+        font-size: 30px;
+        color: grey;
+    }
+
+    @media(max-width:768px) {
+        #home_content {
+            padding-bottom: 15%;
+        }
+
+        footer {
+            text-align: left;
+        }
+    }
+
+    .contact-form-container button {
+        width: 100px;
+        padding: 5px;
+        border: none;
+        outline: none;
+        background-color: red;
+        border-radius: 50px;
+        height: 30px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-left: 78%;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    .container-fluid {
+        margin-top: 100px;
+    }
+
+    .button {
+        background-color: #e00303; /* Green */
+        border-radius: 10%;
+        color: white;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+</style>
 {% endblock style %}
 
 {% block script %}
@@ -21,51 +207,27 @@ Template
 {% endblock script %}
 
 {% block body %}
-<div class="row" id="test">
-    <div class="template-container col-4">
-        <div class="template-display">
-            <h1>Template</h1>
+<div class="container-fluid text-center">
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <div class="vertical-menu">
+            <a href="#" class="active">Update Templates</a>
+            {% for template in templates %}
+            <a href="{{ template.get_absolute_urls }}" style="color: black;">{{ template.subject }}</a>
+            {% endfor %}
         </div>
-    </div>
-    <div class="col-8">
+  
+      </div>
+      <div class="col-sm-10 text-left">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.media }}
             {{ form.as_p }}
-            <input type="submit" />
+            <button type="submit" class="button">Save</button>
         </form>
+      </div>
     </div>
-</div>
+  </div>
 {% endblock body %}
 
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'user/css/formtext.css' %}">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="{% static 'user/css/cont.css' %}">
-    <script src="{% static 'user/js/cont.js' %}"></script>
-</head>
-
-<body>
-    <div class="row">
-        <div class="col-8">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.media }}
-                {{ form.as_p }}
-                <input type="submit" />
-            </form>
-        </div>
-    </div>
-</body>
-
-</html> -->

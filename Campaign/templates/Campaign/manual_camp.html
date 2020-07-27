@@ -6,8 +6,19 @@ Campaign
 {% endblock title %}
 
 {% block style %}
+<!-- Bootstrap Core CSS 
+<link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
+<link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
+
+<link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
 <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
+    label {
+        color: #fff;
+    }
+
     .navbar {
         margin-bottom: 0;
         border-radius: 0;
@@ -26,7 +37,6 @@ Campaign
         background: #4b6cb7;
         background: -webkit-linear-gradient(to left, #333270, #3e3d88);
         background: linear-gradient(to left, #333270, #3e3d88);
-        color: #fff;
     }
 
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -98,7 +108,6 @@ Campaign
 
     /* create account button */
     .Create {
-        margin-top: 70px;
         padding-top: 20px;
         padding-bottom: 20px;
         padding-left: 20px;
@@ -113,9 +122,10 @@ Campaign
     }
 
     thead {
-        color: #fff;
+        color: black;
         font-size: 17px;
     }
+
 
     #home_content {
         position: relative;
@@ -144,7 +154,7 @@ Campaign
 
     .navbar-logo {
         font-size: 30px;
-        color: #fff;
+        color: grey;
     }
 
     @media(max-width:768px) {
@@ -155,10 +165,6 @@ Campaign
         footer {
             text-align: left;
         }
-    }
-
-    label {
-        color: #fff;
     }
 
     .contact-form-container button {
@@ -174,11 +180,20 @@ Campaign
         margin-left: 78%;
         color: rgba(255, 255, 255, 0.9);
     }
+    .container-fluid {
+        margin-top: 100px;
+    }
+    .button {
+        background-color: #e00303; /* Green */
+        border-radius: 10%;
+        color: white;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
 </style>
-<!-- Bootstrap Core CSS -->
-<link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
-<!-- Custom CSS -->
-<link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
 {% endblock style %}
 
 {% block script %}
@@ -190,289 +205,33 @@ Campaign
 {% endblock script %}
 
 {% block body %}
-<div class="Create">
-    <a href="{% url 'campaign' %}" class="btn btn-danger btn-lg active">Compose</a>
-</div>
 <div class="container-fluid text-center">
     <div class="row content">
-        <div class="col-sm-2 sidenav">
-            <div class="vertical-menu">
-                {% for template in templates %}
-                <a href="/campaign0/{{ template.id }}">{{ template.subject }}<span
-                        class="glyphicon glyphicon-user"></span></a>
-                {% endfor %}
-            </div>
-
+      <div class="col-sm-2 sidenav">
+        <div class="vertical-menu">
+            <a href="{% url 'allgroups' %}" class="active">Templates</a>
+            {% for template in templates %}
+            <a href="/campaign0/{{ template.id }}" style="color: black;">{{ template.subject }}</a>
+            {% endfor %}
         </div>
-        <div class="col-sm-10 text-left">
-            <div class="contact-form-container">
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ form.media }}
-                {{ form.as_p }}
-                <label>Email Id</label>
-                <input type="character" name="emailids" placeholder="Enter commaa seperated email id's.">
-                <label>Password</label>
-                <input type="password" name="password">
-
-                <button type="submit">Send</button>
-            </form>
-            <div class="Create">
-                <a href="{% url 'campaign' %}" class="btn btn-danger btn-lg active">Sent to added Group.</a>
-              </div>
-            </div>
-        </div>
+  
+      </div>
+      <div class="col-sm-10 text-left">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <label>Email Id</label>
+            <input type="character" name="emailids" placeholder="Enter commaa seperated email id's.">
+            <label>Password</label>
+            <input type="password" name="password">
+            <button type="submit" class="button">Send</button>
+        </form>
+        
+      </div>
+      <div class="Create">
+        <a href="{% url 'campaign' %}" class="btn btn-danger btn-lg active">Sent to added Group.</a>
+      </div>
     </div>
-</div>
-{% endblock body %}
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Campaign</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contact Page</title>
-    <!-- Bootstrap Core CSS 
-    <link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
-    <!-- Custom CSS 
-    <link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
-    <!-- jQuery 
-    <script src="{% static 'user/js/jquery.js' %}"></script>
-    <!-- Bootstrap Core JavaScript 
-    <script src="{% static 'user/js/bootstrap.min.js' %}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */
-        .navbar {
-            margin-bottom: 0;
-            border-radius: 0;
-            background-color: black;
-        }
-
-        .navbar-brand {
-            color: white;
-            font-family: serif;
-            padding-left: 50px;
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        body {
-            background: #457fca !important;
-            background: -webkit-linear-gradient(to right, #5691c8, #457fca) !important;
-            background: linear-gradient(to right, #5691c8, #457fca) !important;
-        }
-
-        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-        .row.content {
-            height: 500px
-        }
-
-        /* Set gray background color and 100% height */
-        .sidenav {
-            padding-top: 20px;
-            background-color: #f1f1f1;
-            height: 100%;
-        }
-
-        /* sildenav list */
-        .vertical-menu {
-            width: 200px;
-            height: 200px;
-            overflow-y: auto;
-
-        }
-
-        .vertical-menu a {
-            background-color: #eee;
-            color: black;
-            display: block;
-            padding: 12px;
-            text-decoration: none;
-        }
-
-        .vertical-menu a:hover {
-            background-color: gray;
-        }
-
-        .vertical-menu a.active {
-            background-color: #269abc;
-            color: white;
-        }
-
-        .vertical-menu2 {
-            width: 200px;
-            padding-top: 30px;
-        }
-
-        .vertical-menu2 a {
-
-            background-color: #eee;
-            color: black;
-            display: block;
-            padding: 12px;
-            text-decoration: none;
-        }
-
-        .vertical-menu2 a:hover {
-            background-color: gray;
-        }
-
-        /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
-            .sidenav {
-                height: auto;
-                padding: 15px;
-            }
-
-            .row.content {
-                height: auto;
-            }
-        }
-
-        /* create account button */
-        .Create {
-            padding-top: 20px;
-            padding-bottom: 20px;
-            padding-left: 20px;
-        }
-
-        .vertical-menu .glyphicon {
-            float: right;
-        }
-
-        .vertical-menu2 .glyphicon {
-            float: right;
-        }
-
-        thead {
-            color: black;
-            font-size: 17px;
-        }
-
-        #home_content {
-            position: relative;
-            padding-top: 6%;
-            padding-bottom: 6%;
-            margin-top: 12%;
-            margin-bottom: 12%;
-            background-color: rgba(0, 0, 0, 0.7);
-            max-width: 660px;
-        }
-
-        #page_list {
-            padding-top: 50px;
-        }
-
-
-        #signup:before,
-        #Inbox:before,
-        #delivery:before {
-            display: block;
-            content: " ";
-            margin-top: -85px;
-            height: 85px;
-            visibility: hidden;
-        }
-
-        .navbar-logo {
-            font-size: 30px;
-            color: grey;
-        }
-
-        @media(max-width:768px) {
-            #home_content {
-                padding-bottom: 15%;
-            }
-
-            footer {
-                text-align: left;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    
-
-    <div class="navbar navbar-static-top" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle </span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Campaign</a>
-
-
-        </div>
-
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <div class="col-sm-3 col-md-3 ">
-                <form class="navbar-form" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term"
-                            style="width: 1250px">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i
-                                    class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-    <div class="Create">
-        <a href="{% url 'createcontacts' %}" class="btn btn-danger btn-lg active">Compose</a>
-</div>
-<div class="Create">
-  <a  href="{% url 'createcontacts' %}" class="btn btn-danger btn-lg active">Compose</a>
-</div>
-{%for message in messages %}
-          <li><h5>{{message}}</h5></li>
-          {% endfor %}
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <div class="vertical-menu">
-    {% for template in templates %}
-    <a href="/campaign0/{{ template.id }}">{{ template.subject }}<span class="glyphicon glyphicon-user"></span></a>
-    {% endfor %}
-</div>  
-       
-    </div>
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div class="col-sm-2 sidenav">
-                <div class="vertical-menu">
-                    {% for template in templates %}
-                    <a href="/campaign0/{{ template.id }}">{{ template.subject }}<span
-                            class="glyphicon glyphicon-user"></span></a>
-                    {% endfor %}
-                </div>
-
-            </div>
-            <div class="col-sm-10 text-left">
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    {{ form.media }}
-                    {{ form.as_p }}
-                    <label>Email Id</label>
-                    <input type="character" name="emailids" placeholder="Enter commaa seperated email id's.">
-                    <button><a href="{% url 'campaign' %}">Sent to added Group.</a></button>
-
-                    <label>Password</label>
-                    <input type="password" name="password">
-
-                    <button type="submit">Send</button>
-                </form>
-            </div>
-
-</body>
-
-</html>
+  </div>
+  {% endblock body %}

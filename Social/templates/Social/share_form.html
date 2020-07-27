@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Details</title>
-</head>
-<body>
-    <form action="" method="POST">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Social Details
+{% endblock title %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'user/css/formtext.css' %}">
+{% endblock style %}
+
+{% block body %}
+<br>
+<br>
+<br>
+    <form method="POST">
         {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Social Details</legend>
             {{ form.as_p }}
-            <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Save</button>
+        </div>
+{% endblock body %}
