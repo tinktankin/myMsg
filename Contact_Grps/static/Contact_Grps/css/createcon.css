@@ -23,9 +23,9 @@ body {
 }
 
 .createcontact-form .contact-form-container {
-    width: 40%;
     margin: 0 auto;
     padding: 20px 30px;
+    width: 40%;
     overflow: auto;
 }
 
@@ -38,9 +38,9 @@ body {
 
 .createcontact-form .contact-form-container input {
     display: block;
-    width: 100%;
     padding: 2px 5px;
     height: 30px;
+    width: 100%;
     font-size: 1.6rem;
     font-weight: 300;
     border: none;
@@ -60,26 +60,80 @@ body {
     transition: all .1s ease-in-out;
 }
 
-.createcontact-form .contact-form-container button {
-    float: right;
-    width: 100px;
+.createcontact-form .contact-form-container button.import {
+    float: left;
+    margin-left: 10px;
     padding: 5px;
+    height: 30px;
+    width: 180px;
+    background-color: rgb(252, 113, 0);
     border: none;
     outline: none;
+<<<<<<< HEAD
     background-color: red;
+=======
+>>>>>>> f5f9b32e4239608d917a91eb5c886a5f8fb268cf
     border-radius: 50px;
-    height: 30px;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-left: 78%;
-    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
 }
 
-.createcontact-form .contact-form-container button:hover {
+.createcontact-form .contact-form-container button.import a {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.03rem;
+    text-transform: uppercase;
+}
+
+.createcontact-form .contact-form-container button.import:hover {
+    transition: .07s;
+    filter: blur(.0px);
+    transform: scale(1.048);
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.createcontact-form .contact-form-container button.import:hover a {
+    color: rgba(255, 255, 255, 1);
+}
+
+.createcontact-form .contact-form-container button.create {
+    float: right;
+    margin-right: 10px;
+    padding: 5px;
+    height: 30px;
+    width: 100px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    background-color: green;
+    font-weight: 600;
+    letter-spacing: 0.03rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+}
+
+.createcontact-form .contact-form-container button.create:hover {
     background-color: green;
     color: rgba(255, 255, 255, 1);
     transition: .07s;
     filter: blur(.0px);
     transform: scale(1.048);
     -webkit-font-smoothing: subpixel-antialiased;
+}
+
+@media (max-width:992px) {
+    .createcontact-form .contact-form-container {
+        width: 60%;
+    }
+}
+
+@media (max-width:768px) {
+    .createcontact-form .contact-form-container {
+        width: 70%;
+    }
+}
+
+@media (max-width:576px) {
+    .createcontact-form .contact-form-container {
+        width: 90%;
+    }
 }

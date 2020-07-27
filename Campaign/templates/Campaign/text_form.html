@@ -10,6 +10,7 @@ Template
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="{% static 'user/css/formtext.css' %}">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="{% static 'Campaign/css/text_form.css' %}">
 {% endblock style %}
 
 {% block script %}
@@ -21,6 +22,11 @@ Template
 
 {% block body %}
 <div class="row" id="test">
+    <div class="template-container col-4">
+        <div class="template-display">
+            <h1>Template</h1>
+        </div>
+    </div>
     <div class="col-8">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
