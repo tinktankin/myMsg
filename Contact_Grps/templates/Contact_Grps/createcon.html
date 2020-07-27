@@ -19,12 +19,12 @@ Create Contact
         <form action="" method="post">
             {% csrf_token %}
             {{form.as_p}}
-            <button type="submit">Create</button>
+            <button class="import" disabled="disabled"><a href="{% url 'import' %}">Import From CSV File</a></button>
+            <button class="create" type="submit">Create</button>
         </form>
     </div>
 </section>
 
-<button disabled="disabled"><a href="{% url 'import' %}">Import from CSV file</a></button>
 
 {% endblock body %}
 
