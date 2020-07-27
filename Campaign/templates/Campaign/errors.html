@@ -9,7 +9,9 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<title>Something Went Wrong</title>
+  <link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
 
+  <link href="{% static 'user/css/constyle.css' %}" rel="stylesheet">
     <style>
         * {
             -webkit-box-sizing: border-box;
@@ -137,11 +139,14 @@
             <p><b>Check the following Points.</b></p>
             </h2>
             <ul>
-                <li><a href="https://myaccount.google.com/lesssecureapps">Allow less Secure Applications to your registered Account.</a></li>
+                <li><a href="https://myaccount.google.com/lesssecureapps"><h4>Allow less Secure Applications to your registered Account.</h4></a> <span></span><div class="Create">
+                  <a href="https://myaccount.google.com/lesssecureapps" class="btn btn-danger btn-lg active">Allow Less Secure Apps.</a>
+              </div></li>
                 <br>
-                <li><a href="https://myaccount.google.com/apppasswords">If you are using 2 step Authentication, Create App Password for this Application and Use it.</a></li>
+                <li><a href="https://myaccount.google.com/apppasswords"><h4>If you are using 2 step Authentication, Create App Password for this Application and Use it.</h4></a><span></span><div class="Create">
+                  <a href="https://myaccount.google.com/apppasswords" class="btn btn-danger btn-lg active">Use 2 step Authentication .</a></li>
                 <br>
-                <li><a href="">Check your Password.</a> (Note:- Make sure you are providing your Email Password)</li>
+                <li><a href=""><h4>Check your Password.</h4></a><h4>(Note:- Make sure you are providing your Email Password)</h4></li>
             </ul>
 			<a href="{% url 'index' %}">Back to homepage</a>
 		</div>

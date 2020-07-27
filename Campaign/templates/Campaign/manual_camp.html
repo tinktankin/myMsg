@@ -160,6 +160,20 @@ Campaign
     label {
         color: #fff;
     }
+
+    .contact-form-container button {
+        width: 100px;
+        padding: 5px;
+        border: none;
+        outline: none;
+        background-color: red;
+        border-radius: 50px;
+        height: 30px;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-left: 78%;
+        color: rgba(255, 255, 255, 0.9);
+    }
 </style>
 <!-- Bootstrap Core CSS -->
 <link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
@@ -177,7 +191,7 @@ Campaign
 
 {% block body %}
 <div class="Create">
-    <a href="{% url 'createcontacts' %}" class="btn btn-danger btn-lg active">Compose</a>
+    <a href="{% url 'campaign' %}" class="btn btn-danger btn-lg active">Compose</a>
 </div>
 <div class="container-fluid text-center">
     <div class="row content">
@@ -191,19 +205,22 @@ Campaign
 
         </div>
         <div class="col-sm-10 text-left">
+            <div class="contact-form-container">
             <form action="" method="POST">
                 {% csrf_token %}
                 {{ form.media }}
                 {{ form.as_p }}
                 <label>Email Id</label>
                 <input type="character" name="emailids" placeholder="Enter commaa seperated email id's.">
-                <button><a href="{% url 'campaign' %}">Sent to added Group.</a></button>
-
                 <label>Password</label>
                 <input type="password" name="password">
 
                 <button type="submit">Send</button>
             </form>
+            <div class="Create">
+                <a href="{% url 'campaign' %}" class="btn btn-danger btn-lg active">Sent to added Group.</a>
+              </div>
+            </div>
         </div>
     </div>
 </div>

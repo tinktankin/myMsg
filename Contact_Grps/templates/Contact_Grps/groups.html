@@ -58,9 +58,6 @@ Groups
                 <ul class="list-group" id="contact-list">
                     {% for group in groups %}
                     <li class="list-group-item">
-                        <div class="col-xs-12 col-sm-3">
-                            <img src="{{ group.gimg.url }}" alt="Scott Stevens" class="img-responsive img-circle" />
-                        </div>
                         <div class="col-xs-12 col-sm-9">
                             <span class="name"><a href={{ group.get_absolute_url}}>{{ group.gname }}</a></span><br />
 

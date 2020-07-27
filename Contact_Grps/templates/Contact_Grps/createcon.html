@@ -20,11 +20,16 @@ Create Contact
             {% csrf_token %}
             {{form.as_p}}
             <button type="submit">Create</button>
+
+            <div class="Create">
+                <a href="{% url 'import' %}" class="btn btn-danger btn-lg active">Import from CSV file</a>
+              </div>
         </form>
     </div>
+    
 </section>
 
-<button disabled="disabled"><a href="{% url 'import' %}">Import from CSV file</a></button>
+
 
 {% endblock body %}
 
