@@ -6,7 +6,6 @@ Campaign
 {% endblock title %}
 
 {% block style %}
-<<<<<<< HEAD
 <!-- Bootstrap Core CSS 
 <link href="{% static 'user/css/bootstrap.css' %}" rel="stylesheet">
 <!-- Custom CSS -->
@@ -182,9 +181,6 @@ Campaign
         margin-top: 100px;
     }
 </style>
-=======
-<link href="{% static 'Campaign/css/campaign.css' %}" rel="stylesheet">
->>>>>>> f5f9b32e4239608d917a91eb5c886a5f8fb268cf
 {% endblock style %}
 
 {% block script %}
@@ -196,19 +192,10 @@ Campaign
 {% endblock script %}
 
 {% block body %}
-<<<<<<< HEAD
 <div class="Create">
     <a href="{% url 'manual_campaign' %}" class="btn btn-danger btn-lg active">Sent to Custom Contact.</a>
 </div>
 </div>
-=======
-{%for message in messages %}
-<li>
-    <h5>{{message}}</h5>
-</li>
-{% endfor %}
-
->>>>>>> f5f9b32e4239608d917a91eb5c886a5f8fb268cf
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-2 sidenav">
