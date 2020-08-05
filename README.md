@@ -1,4 +1,12 @@
-      Email Design Delivery
+# Email Design Delivery
+1. Productive solution for connecting with people.
+   Applications features:
+   * Create Contacts.
+   * Create Groups.
+   * Design Customize Templates.
+   * Send Email Templates.
+   * Track Emails.
+
 
 ## Installation Instructions
 
