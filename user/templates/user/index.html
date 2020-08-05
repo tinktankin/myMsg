@@ -23,6 +23,11 @@
         <span>Password</span>
         <input type="password" name="password">
       </label>
+      <ul>
+        {%for message in messages %}
+        <li><h3>{{message}}</h3></li>
+        {% endfor %}
+      </ul>
       <button class="submit" type="submit">Sign In</button>
       <p class="forgot-pass"><a href="https://myaccount.google.com/lesssecureapps">Allow Less Secure Apps?</a></p>
       <p class="forgot-pass"><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
@@ -34,11 +39,7 @@
           <center><li><a href="{% provider_login_url 'google' %}"><img src="{% static 'user/img/google-logo.png' %}"></a></li></center>
           
         </ul>
-        <ul>
-          {%for message in messages %}
-          <li><h3>{{message}}</h3></li>
-          {% endfor %}
-        </ul>
+        
       </div>
       
                 

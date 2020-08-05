@@ -16,11 +16,8 @@ Create Group
 <section class="create-group-form">
     <div class="form-container">
         <form method="POST" enctype="multipart/form-data">
-
             {% csrf_token %}
-
             {{ form }}
-
             <input type="submit" value="Submit">
         </form>
     </div>

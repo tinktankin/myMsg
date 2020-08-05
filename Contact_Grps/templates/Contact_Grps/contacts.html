@@ -186,7 +186,7 @@ Contact Page
         <a href="#" class="active">All Contacts</a>
         <a href="{% url 'allgroups' %}" class="active">All Groups</a>
         {% for group in groups %}
-        <a href="#">{{ group.gname }}<span class="glyphicon glyphicon-user"></span></a>
+        <a href="{{ group.get_absolute_url }}">{{ group.gname }}<span class="glyphicon glyphicon-user"></span></a>
         {% endfor %}
       </div>
 
