@@ -1,3 +1,4 @@
+<<<<<<< HEAD
       Email Design Delivery
 
 ## Installation Instructions
@@ -27,3 +28,6 @@
     ```shell
     (env)$ python manage.py runserver
     ```
+=======
+# Email Design Delivery
+>>>>>>> aa19c1f11cd72d3dcb2a18b1817f15f7d024906a
