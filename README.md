@@ -6,7 +6,8 @@
    * Design Customize Templates.
    * Send Email Templates.
    * Track Emails.
-   * Share on social media
+   * Share on social media platforms
+      
 
 
 ## Installation Instructions
