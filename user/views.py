@@ -24,7 +24,8 @@ from .tokens import account_activation_token
 
 
 def index(request):
-    return render(request,'user/home.html')
+    path='user/home.html'
+    return render(request,path)
 
 def activate_account(request, uidb64, token):
     try:
